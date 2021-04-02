@@ -11,13 +11,19 @@ export default function App() {
   const handleSubmitGoal = (goal) => {
     setMyGoals(currentGoals => [...currentGoals, { key: Math.random().toString(), value: goal }])
   }
+
+  const removeGoalHandler = (goalId) => {
+    setMyGoals(currentGoals => {
+      return currentGoals.filter((goal) => goal.key !== goalId)
+    })
+  }
   
 
   return (
     <View style={styles.container}>
       <GoalInput onAddGoal={handleSubmitGoal} />
       <FlatList data={myGoals} renderItem={itemData => (
-       <GoalItem title ={itemData.item.value}/>
+       <GoalItem title ={itemData.item.value} onDelete={() => removeGoalHandler(itemData.item.key)} />
       )} />
     </View>
   );
