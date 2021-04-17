@@ -10,6 +10,9 @@ export default function App() {
   const [isAddMode, setIsAddMode] = useState(false)
 
   const handleSubmitGoal = (goal) => {
+    if (goal === undefined) {
+        return
+    }
     setMyGoals(currentGoals => [...currentGoals, { key: Math.random().toString(), value: goal }])
     setIsAddMode(false)
   }
